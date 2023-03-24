@@ -1,7 +1,7 @@
-const sequelize = require("../db");
-
-
-    const Payment= sequelize.define('Payment',{
+module.exports= (sequelize,DataTypes)=>{
+    return sequelize.define(
+        'Payment',
+        {
         id:{
             type:DataTypes.INTEGER,
             primaryKey:true,
@@ -9,13 +9,33 @@ const sequelize = require("../db");
             allowNull:false
         },
         amount:{
-            type:DataTypes.DECIMAL(10,2),
+            type:DataTypes.FLOAT,
             allowNull:false
+        },
+        paymentDate:{
+            type:DataTypes.DATE,
+            allowNull:false,
         },
         status:{
             type:DataTypes.ENUM('pending','paid','failed'),
             allowNull:false,
-            defaultValue:'pending'
+            defaultValue:'pending',
         }
-    })
-    module.exports=Payment;
+    },
+    {
+      freezeTableName:true,
+      tableName:'Payments'
+    }
+    );
+};
+
+    // Payment.associate = function(models){
+    //     //a payment belongs to a rental
+    //     Payment.belongsTo(models.Rental,{
+    //         foreignKey:{
+    //             name:'rental_id',
+    //             allowNull:false,
+    //         },
+    //         onDelete:'CASCADE'
+    //     });
+    // };
