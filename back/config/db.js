@@ -1,7 +1,11 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('express_db_web_app','root','',{
+const config = require("./config");
+const {database, host, user, password}=config.database;
+
+
+const sequelize = new Sequelize(database,user,password,{
     dialect:'mysql',
-    host:'localhost',
+    host:host,
     define:{
         timestamp:true
     }
