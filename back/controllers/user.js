@@ -1,60 +1,70 @@
 const UsersDb = require('../models').User;
 
 const controller= {
-    addUser: async (req,res)=>{
-        const user = {
-            email: req.body.email,
-        };
-        let err = false;
-        if(!user.email){
-            res.status(400).send({message:"Email must be completed!"});
-            err=true;
-        }
-        if(!user.email.match(
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
-        ){
-            res.status(400).send({message:"Invalid email!"});
-            err = true;
-        }
-        await UsersDb.findOne({
-            where: {
-                email: user.email,
-            },
-        })
-        .then((findUser)=>{
-            if(findUser){
-                err=true;
-                throw new Error("Email is already used by another user!");
-            }
-        })
-        .catch((error)=>{
-            console.log(error);
-            res.status(400).send({message:"Email already inserted in db!"});
-        });
-
-        if(!err){
-            await UsersDb.create(user)
-            .then((newUser)=>{
-                res.status(201).send(newUser);
-            })
-            .catch((error)=>{
-                console.log(error);
-                res.status(500).send({message:"Error upon insertion of user!"});
-            });
-        }
-    },
-
-
-    getAll: async (res,req)=>{
-        await UsersDb.findAll()
-        .then((users)=>res.status(200).send(users))
-        .catch(()=>{
-            res.status(500).send({message:"Error upon getting users!"});
-        });
+add: async (req,res)=>{
+    //console.log(req.body);
+    const{email, password, name, role} = req.body;
+    let errors = [];
+    if(!name){
+        errors.push("Name field must be completed!");
     }
+    if(!email){
+        errors.push("Email must be completed!");
+    }
+    if(!password){
+        errors.push("Password must be completed!");
+    }
+    if(email.match(
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+    ){
+        errors.push("Invalid email format!");
+    }
+    try{
+        const findUser = await UsersDb.findOne({
+            where:{
+                email: email,
+            },
+        });
+        if(findUser){
+            errors.push("Email is already used by somebody else!");
+        }
+        if(errors.length >0){
+            return res.status(400).json({ errors });
+        }else{
+            
+            const user = {
+                email,
+                password,
+                name,
+                role,
+            };
+            const newUser = await UsersDb.create(user);
+            res.status(201).send(newUser);
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).send({message:"Error upon insertion of user!"});
+    }
+},
 
+
+getAll: async (req,res)=>{
+    await UsersDb.findAll()
+    .then((users)=>{
+    if(users.length !== 0){
+        res.status(200).send(users)
+    }else{
+        res.status(200).send({message:"No users found!"});
+    }
     
+})
+    .catch(()=>{
+        res.status(500).send({message:"Error upon getting users!"});
+    });
+}
+
+
 
 }
 

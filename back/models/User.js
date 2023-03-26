@@ -14,40 +14,6 @@ module.exports=(sequelize,DataTypes)=>{
   });
 };
 
-  // User.associate = function(models){
-  //   //user has many sport facilities (as owner)
-  //   User.hasMany(models.SportFacility,{
-  //     as:'owned_facilities',
-  //     foreignKey:{
-  //       name:'owner_id',
-  //       allowNull:false,
-  //     },
-  //     onDelete:'CASCADE'
-  //   });
-
-  //   //user has many rentals (as client)
-  //   User.hasMany(models.Rental, {
-  //     as:'rentals',
-  //     foreignKey:{
-  //       name:'client_id',
-  //       allowNull:false,
-  //     },
-  //     onDelete:'CASCADE'
-  //   });
-  // };
-
-  //method to get the sport facilities that the user owns
-
-  // User.prototype.getOwnedFacilities = async function(){
-  //   const facilities = await sequelize.models.SportFacility.scope('facility_owner').findAll({
-  //     where:{
-  //       ownerId: this.id,
-  //     },
-  //   });
-  //   return facilities;
-  // };
-
-
     
       
      

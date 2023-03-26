@@ -1,10 +1,15 @@
 const express = require("express")
 const router = require('./routes');
+const cors = require("cors");
+const config = require("./config/config.json");
+const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 
 app.use(
     cors({
@@ -14,12 +19,12 @@ app.use(
     })
   );
 
+
+
+
+
+
 app.use("/api", router);
-
-
-app.use("/", (req,res)=>{
-    res.status(200).send({message:"app works!"});
-})
 
 const port = 8080;
 app.listen(port, ()=>{

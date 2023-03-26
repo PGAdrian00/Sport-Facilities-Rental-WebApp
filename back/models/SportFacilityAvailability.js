@@ -10,7 +10,7 @@ module.exports =(sequelize, DataTypes)=>{
             },
           
         date: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: false
               },
           
@@ -36,15 +36,6 @@ module.exports =(sequelize, DataTypes)=>{
     );
   };
 
-    // SportFacilityAvailability.associate = function (models) {
-    //   // A sport facility availability belongs to a sport facility
-    //   SportFacilityAvailability.belongsTo(models.SportFacility, {
-    //     foreignKey: {
-    //       name: 'facilityId',
-    //       allowNull: false,
-    //     },
-    //     onDelete:'CASCADE'
-    //   });
-    // };
+   
 
     
