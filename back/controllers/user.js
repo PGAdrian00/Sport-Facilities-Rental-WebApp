@@ -14,7 +14,7 @@ add: async (req,res)=>{
     if(!password){
         errors.push("Password must be completed!");
     }
-    if(email.match(
+    if(!email.match(
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
     ){
@@ -28,6 +28,9 @@ add: async (req,res)=>{
         });
         if(findUser){
             errors.push("Email is already used by somebody else!");
+        }
+        if (!['observer', 'facility_owner', 'client'].includes(role)) {
+            errors.push("Invalid role specified!");
         }
         if(errors.length >0){
             return res.status(400).json({ errors });

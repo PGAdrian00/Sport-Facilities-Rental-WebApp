@@ -25,6 +25,9 @@ app.use(
 
 
 app.use("/api", router);
+app.use("/main", ()=>{
+  console.log("Hello sir");
+})
 
 const port = 8080;
 app.listen(port, ()=>{
