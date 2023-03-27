@@ -15,6 +15,21 @@ getAll: (req,res)=>{
     
 },
 
+getById: async (req,res)=>{
+    try{
+        const facility = await SportFacilitiesDb.findByPk(req.params.id);
+        if(facility){
+            res.status(200).send(facility);
+        }else{
+            res.status(404).send({message:"Facility not found!"});
+        }
+
+    }catch(err){
+        console.log(err);
+        res.status(500).send({message:"Server error"});
+    }
+},
+
 add: async (req,res)=>{
     const{ name, description, sport_type, location, address, is_indoor, has_night_lights, price_per_hour} = req.body;
     
@@ -71,7 +86,7 @@ return res.status(400).json({ errors });
     }
 },
 
-update: (req,res)=>{
+updateById: (req,res)=>{
     const{sportFacilityId}=req.params.id;
     const{name, description, sport_type, location, address, is_indoor, has_night_lights, price_per_hour}=req.body;
 
@@ -101,7 +116,7 @@ update: (req,res)=>{
     })
 },
 
-delete: (req, res)=>{
+deleteById: (req, res)=>{
     const sportFacilityId = req.params.id;
     SportFacilitiesDb.destroy({where:{id: sportFacilityId}})
     .then((result)=>{

@@ -65,6 +65,20 @@ getAll: async (req,res)=>{
     .catch(()=>{
         res.status(500).send({message:"Error upon getting users!"});
     });
+},
+
+getById: async(req,res)=>{
+    try{
+        const user = await UsersDb.findByPk(req.params.id);
+        if(user){
+            res.status(200).send(user);
+        }else{
+            res.status(404).send({message:"User not found!"});
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).send({message:"Server error!"});
+    }
 }
 
 

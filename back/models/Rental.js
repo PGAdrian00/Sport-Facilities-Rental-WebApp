@@ -35,23 +35,4 @@ module.exports=(sequelize,DataTypes)=>{
         }
         );
 };
-    
-// Rental.associate = function(models){
-//     //a rental belongs to a client who rented the sport facility
-//     Rental.belongsTo(models.User,{
-//         foreignKey:{
-//             name:'client_id',
-//             allowNull:false,
-//         },
-//         onDelete:'CASCADE'
-//     });
-
-//     //rental belongs to sport facility
-//     Rental.belongsTo(models.SportFacility, {
-//         foreignKey:{
-//             name:'facility_id',
-//             allowNull:false,
-//         },
-//         onDelete:'CASCADE'
-//     });
-// };
+ 
