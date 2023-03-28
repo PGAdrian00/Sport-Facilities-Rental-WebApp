@@ -41,7 +41,25 @@ updateById: async(req,res)=>{
         res.status(500).send({message:"Server error!"});
     }
 
+},
+
+deleteById: (req, res)=>{
+    const paymentId = req.params.id;
+    PaymentsDb.destroy({where:{id: paymentId}})
+    .then((result)=>{
+        if(result){
+        res.status(200).send({message:"Payment with ${id} has been successfully deleted!"});
+    }else{
+        res.status(404).send({message:"Payment with ${id} not found!"});
+    }
+    })
+    .catch((err)=>{
+        console.log(err);
+        res.status(500).send({message:"Error deleting payment with id ${id}"});
+    })
 }
+
+
 };
 
 module.exports = controller;

@@ -47,6 +47,41 @@ const controller ={
             res.status(500).send({message:"Server error!"});
         }
 
+    },
+
+updateById: async(req,res)=>{
+
+    const{id}=req.params.id;
+    try{
+        const status = FacilitiesStatusDb.findByPk(id);
+        if(status){
+            await status.update(req.body);
+            res.status(200).send({message:"Rental updated successfully!"});
+
+        }else{
+            res.status(404).send({message:"Rental not found!"});
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).send({message:"Server error!"});
+    }
+}
+    ,
+
+    deleteById: (req, res)=>{
+        const facilityStatusId = req.params.id;
+        FacilitiesStatusDb.destroy({where:{id: facilityStatusId}})
+        .then((result)=>{
+            if(result){
+            res.status(200).send({message:"Facility status with ${id} has been successfully deleted!"});
+        }else{
+            res.status(404).send({message:"Facility status with ${id} not found!"});
+        }
+        })
+        .catch((err)=>{
+            console.log(err);
+            res.status(500).send({message:"Error deleting facility status with id ${id}"});
+        })
     }
 
 }
