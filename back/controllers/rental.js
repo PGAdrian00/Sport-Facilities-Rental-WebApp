@@ -68,7 +68,7 @@ add: async(req,res)=>{
     }
 
     try{
-        const newRental = await Rental.create({
+        const newRental = await RentalsDb.create({
             start_date,
             end_date,
             totalCost,
