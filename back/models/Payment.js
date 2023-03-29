@@ -29,13 +29,4 @@ module.exports= (sequelize,DataTypes)=>{
     );
 };
 
-    // Payment.associate = function(models){
-    //     //a payment belongs to a rental
-    //     Payment.belongsTo(models.Rental,{
-    //         foreignKey:{
-    //             name:'rental_id',
-    //             allowNull:false,
-    //         },
-    //         onDelete:'CASCADE'
-    //     });
-    // };
+  

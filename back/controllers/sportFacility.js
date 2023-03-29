@@ -31,7 +31,8 @@ getById: async (req,res)=>{
 },
 
 add: async (req,res)=>{
-    const{ name, description, sport_type, location, address, is_indoor, has_night_lights, price_per_hour} = req.body;
+    const{ name, description, sport_type, location, address,
+         is_indoor, has_night_lights, price_per_hour} = req.body;
     
     let errors = [];
 
@@ -65,25 +66,26 @@ return res.status(400).json({ errors });
 }else
 {
 
-    const newFacility ={
-        name, 
-        description, 
-        sport_type, 
-        location, address, 
-        is_indoor, 
-        has_night_lights, 
-        price_per_hour
-    }
-        
-            await SportFacilitiesDb.create({newFacility})
-            .then((sportFacility)=>{
-                res.status(201).send(sportFacility);
-            })
-            .catch((err)=>{
-                console.log(err);
-                res.status(500).send({message:'Error on adding sport facility!'})
-            })
-    }
+    
+        try{
+            const facility ={
+                name, 
+                description, 
+                sport_type, 
+                location,
+                address, 
+                is_indoor, 
+                has_night_lights, 
+                price_per_hour
+            };
+            const newFacility =await SportFacilitiesDb.create(facility);
+            res.status(201).send(newFacility);
+        }catch(err){
+            console.log(err);
+            res.status(500).send({message:"Error upon insertion of sport facility!"});
+        }
+    
+}
 },
 
 updateById: (req,res)=>{
