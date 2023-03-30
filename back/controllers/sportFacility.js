@@ -44,8 +44,12 @@ getById: async (req,res)=>{
 add: async (req,res)=>{
     const{ name, description, sport_type, location, address,
          is_indoor, has_night_lights, price_per_hour} = req.body;
-    
+    const user = req.user;
     let errors = [];
+
+    if(user.role !== 'facility_owner'){
+        res.status(403).send("Access denied! Only facility owners can add facilities!");
+    }
 
 if (!name) {
 errors.push('Name is required');
@@ -79,6 +83,7 @@ return res.status(400).json({ errors });
 
     
         try{
+            const userId = req.session.passport.user.id;
             const facility ={
                 name, 
                 description, 
@@ -87,7 +92,8 @@ return res.status(400).json({ errors });
                 address, 
                 is_indoor, 
                 has_night_lights, 
-                price_per_hour
+                price_per_hour,
+                facility_owner_id:userId,
             };
             const newFacility =await SportFacilitiesDb.create(facility);
             res.status(201).send(newFacility);
