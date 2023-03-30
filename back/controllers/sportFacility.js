@@ -1,10 +1,16 @@
 const SportFacilitiesDb = require('../models').SportFacility;
-const UserDB = require('../models').User;
+const UserDb = require('../models').User;
+const SportFacilitiesAvailabilityDb = require('../models').SportFacilityAvailability;
 
 const controller = {
 
 getAll: (req,res)=>{
-    SportFacilitiesDb.findAll({include:[{model:UserDB}]})
+    SportFacilitiesDb.findAll({
+        include:[
+            {model:UserDb},
+            {model:SportFacilitiesAvailabilityDb}
+        ]
+    })
     .then((facilities=>{
         res.status(200).send(facilities);
     }))
@@ -17,7 +23,12 @@ getAll: (req,res)=>{
 
 getById: async (req,res)=>{
     try{
-        const facility = await SportFacilitiesDb.findByPk(req.params.id);
+        const facility = await SportFacilitiesDb.findByPk(req.params.id,{
+            include:[
+                {model:UserDb},
+                {model:SportFacilitiesAvailabilityDb}
+            ]
+        });
         if(facility){
             res.status(200).send(facility);
         }else{

@@ -14,6 +14,24 @@ const FacilityStatus=FacilityStatusModel(db, Sequelize);
 const Rental=RentalModel(db, Sequelize);
 const Payment=PaymentModel(db, Sequelize);
 
+
+User.hasMany(SportFacility,
+    {
+        foreignKey:{
+            name:'facility_owner_id',
+            allowNull:false
+        },
+    
+    onDelete:"CASCADE",
+    onUpdate:"CASCADE",
+});
+SportFacility.belongsTo(User,{
+    foreignKey:{
+        name:"facility_owner_id",
+        allowNull:false
+    }
+});
+
 User.hasMany(Rental,{
     onDelete:"CASCADE",
     onUpdate:"CASCADE",
