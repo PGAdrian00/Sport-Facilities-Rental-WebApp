@@ -47,7 +47,7 @@ add: async (req,res)=>{
     const user = req.user;
     let errors = [];
 
-    if(user.role !== 'facility_owner'){
+    if(!user || user.role !== 'facility_owner'){
         res.status(403).send("Access denied! Only facility owners can add facilities!");
     }
 
