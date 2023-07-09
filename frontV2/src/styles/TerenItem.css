@@ -1,0 +1,37 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-button {
+    margin: 0 10px;
+    width: 100px; 
+    height: 48px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.my-button2 {
+    margin: 0 10px;
+    width: 100px; 
+    height: 48px;
+    font-size: 16px;
+    padding: 10px;
+
+    background-color: #090B3C;
+    border:2px solid #090B3C;
+    transition: 0.s all ease-in;
+}
+
+.my-button3 {
+    margin: 0 10px;
+    width: 100px; 
+    height: 48px;
+    font-size: 16px;
+    padding: 10px;
+
+    background-color: #090B3C;
+    border:2px solid #090B3C;
+    transition: 0.s all ease-in;
+}
+

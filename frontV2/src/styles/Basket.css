@@ -1,0 +1,48 @@
+.basket {
+    position: absolute;
+    right: 0;
+    max-width: 100%;
+    width: 330px;
+    top: 0;
+    bottom: 0;
+    max-height: 100vh;
+    height: 100%;
+    background: #fff;
+    z-index: 11;
+    padding: 20px 30px;
+    box-shadow: 1px 3px 10px rgba(0,0,0,0.4);
+   
+  }
+  .basket span {
+    padding:1px 5px;
+    border:2px solid black;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .item-add {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .item-add .name {
+    width: 170px;
+  }
+  
+  .item-add .btns button {
+    display: inline-block;
+    border: 1px solid #999;
+    width: 20px;
+    cursor: pointer;
+  }
+  .item-add .qty {
+    margin-left: auto;
+  }
+
+  .finalizeaza{
+    padding: 10px;
+    display: block;
+    margin:10% auto;
+    color: white;
+    background-color: #66BA7A;
+    cursor: pointer;
+
+  }
