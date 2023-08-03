@@ -4,12 +4,17 @@ import Homepage from "../assets_poze/basketball/paris-court-maybe-homepage.jpg";
 import TerenuriNoi from "../components/TerenuriNoi";
 import Search from '../components/Search';
 import FacilitiesData from '../FacilitiesData.json';
+import { useNavigate } from "react-router-dom";
 
 import "../styles/Home.css";
 
 function Home() {
-
+  const navigate = useNavigate();
   
+  const handleRentButtonClick = () => {
+    
+    navigate("/baschet");
+  }
 
   return (
     <div className="home">
@@ -21,9 +26,9 @@ function Home() {
         <div className="try">
           <h1>Vrei sa joci?</h1>
           
-          <Link to="/pizza">
-            <button>INCHIRIAZA TEREN</button>
-          </Link>
+          
+            <button onClick={handleRentButtonClick}>INCHIRIAZA TEREN</button>
+          
         </div>
       </div>
       <TerenuriNoi />

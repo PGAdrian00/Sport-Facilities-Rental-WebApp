@@ -9,8 +9,8 @@ module.exports=(sequelize,DataTypes)=>{
 
     name: {type: DataTypes.STRING,allowNull: false},
 
-    role: { type: DataTypes.ENUM('client', 'facility_owner', 'observer'),
-              defaultValue:'observer',allowNull: false}
+    role: { type: DataTypes.ENUM('client', 'facility_owner', 'administrator'),
+              defaultValue:'client',allowNull: false}
   });
 };
 

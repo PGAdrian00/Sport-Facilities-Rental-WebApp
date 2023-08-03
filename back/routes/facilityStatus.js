@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const facilityStatusRouter=require('../controllers/facilityStatus');
+const statusController = require("../controllers/facilityStatus");
 
-
-router.get("/", facilityStatusRouter.getAll );
-router.get("/:id", facilityStatusRouter.getById );
-router.put("/",facilityStatusRouter.add);
-router.post("/:id", facilityStatusRouter.updateById);
-router.delete("/:id",facilityStatusRouter.deleteById);
-module.exports=router;
+router.get("/", statusController.getAll);
+router.get("/:id", statusController.getById);
+router.post("/:id", statusController.add);
+router.put("/:id", statusController.updateById);
+module.exports = router;

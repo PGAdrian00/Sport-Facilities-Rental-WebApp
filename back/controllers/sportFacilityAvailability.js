@@ -1,10 +1,14 @@
 const SportFacilitiesAvailabilityDb = require("../models").SportFacilityAvailability;
 const SportFacilitiesDb = require("../models").SportFacility;
+const RentalsDb = require("../models").Rental;
+
 
 const controller = {
 
 getAll:(req,res)=>{
-SportFacilityAvailabilityDb.findAll()
+    SportFacilitiesAvailabilityDb.findAll({
+        include:[{model: SportFacilitiesDb}, {model: RentalsDb}]
+    })
 .then((sportFacilityAvailabilities)=>{
     res.status(200).send(sportFacilityAvailabilities);
 })
@@ -31,22 +35,46 @@ getById: async(req,res)=>{
 add: async(req,res)=>{
 const{date, start_time, end_time, available}= req.body;
 
-const newFacilityAvailability ={
-    date, 
-    start_time, 
-    end_time, 
-    available
+const id = req.params.id;
+try{
+    const sportFacility = await SportFacilitiesDb.findByPk(id);
+    console.log(id);
+    let errors = [];
+    if(!sportFacility){res.status(404).send("Sport facility not found!");}
 
+    
+    if(!date){
+        errors.push("Date required!");
+    }
+    if(!start_time){
+        errors.push("Start time required!")
+    }
+    if(!end_time){
+        errors.push("End time required!");
+    }
+    if(!available){
+        errors.push("Available required!")
+    }
+    if (errors.length > 0) {
+        return res.status(400).json({ errors });}
+        else{
+            const facilityAvailability ={
+                date, 
+                start_time, 
+                end_time, 
+                available,
+                SportFacilityId: id
+            
+            };
+
+            const newFacilityAvailability = await SportFacilitiesAvailabilityDb.create(facilityAvailability);
+            res.status(200).send(newFacilityAvailability);
+        }
+}catch(err){
+    console.log(err);
+    res.status(500).send('Server error');
 }
 
-await SportFacilityAvailabilityDb.create({newFacilityAvailability})
-    .then((sportFacilityAvailability)=>{
-        res.status(201).send(sportFacilityAvailability);
-    })
-    .catch((err)=>{
-        console.log(err);
-        res.status(500).send({message:"Error on adding sport facility!"});
-    })
 
 },
 
@@ -73,6 +101,7 @@ SportFacilityAvailabilityDb.update(
         res.status(500).send({message:"Error updating sport facility availability with id ${sportFacilityAvailabilityId}!"});
     })
 },
+
 delete:(req,res)=>{
 const{sportFacilityAvailabilityId}=req.params;
 SportFacilityAvailabilityDb.destroy(
@@ -90,7 +119,48 @@ SportFacilityAvailabilityDb.destroy(
         console.log(err);
     res.status(500).send({message:"Error on deleting sport facility availability!"});
     })
+},
+
+rentThePlace: async(req,res) => {
+const{id,userId}=req.params;
+
+console.log(id);
+console.log(userId);
+
+try{
+    const availability=await SportFacilitiesAvailabilityDb.findByPk(id);
+
+const facility = await SportFacilitiesDb.findByPk(availability.SportFacilityId);
+
+
+
+await availability.update({
+    ...availability,
+    available: 0
+});
+try{
+    const newRental = await RentalsDb.create({
+    start_date: availability.date,
+    end_date: availability.date,
+    totalCost: facility.price_per_hour,
+    status: "submitted",
+    UserId: userId,
+    SportFacilityAvailabilityId: id
+    });
+    res.status(201).send(newRental);
 }
+catch(err){
+    console.log(err);
+    res.status(500).send({message:"Server error!"});
+}
+
+}catch(err){
+    console.log(err);
+    res.status(500).send({message:"Server error"});
+}
+}
+
+
 
 
 }

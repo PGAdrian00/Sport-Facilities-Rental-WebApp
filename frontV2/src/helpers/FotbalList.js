@@ -30,7 +30,7 @@ export const FotbalList=[
         image: Teren3,
         name: "Teren Fotbal Central",
         description: "Situat în centrul orașului, acest teren de fotbal dispune de un sistem de iluminare pentru jocuri seara.",
-        price: 130.00
+        price: 40.00
     },
     {
         id: 12,
@@ -44,7 +44,7 @@ export const FotbalList=[
         image: Teren5,
         name: "Teren Fotbal Comunitar",
         description: "Teren de fotbal comunitar situat în parc, ideal pentru jocuri amicale și evenimente comunitare.",
-        price: 70.00
+        price: 15.00
     },
     {
         id: 14,

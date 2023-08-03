@@ -14,14 +14,14 @@ function NavbarTop() {
           src={Facebook}
           alt="facebook"
           onClick={() => {
-            window.open("http://facebook.com", "_blank");
+            window.open("https://www.facebook.com/terenuri.sportive.create.build.play", "_blank");
           }}
         />
         <img
           src={Instagram}
           alt="instagram"
           onClick={() => {
-            window.open("http://instagram.com", "_blank");
+            window.open("https://www.instagram.com/terenurisportive/", "_blank");
           }}
         />
         <img

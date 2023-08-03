@@ -3,8 +3,8 @@ import '../styles/Categories.css'
 import {Link} from 'react-router-dom'
 import Hamburger from '../assets_poze/hamburger.png'
 
-function Categories() {
-  
+function Categories( {props} ) {
+  const [userRole, setUserRole] = useState('user')
   const [showLinks,setShowLinks] = useState(false)
   function showMenu(){
  

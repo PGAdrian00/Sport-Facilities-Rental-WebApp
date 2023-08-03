@@ -1,89 +1,76 @@
-const FacilitiesStatusDb = require('../models').FacilityStatus;
+const StatusDb = require('../models').FacilityStatus;
 
-const controller ={
+const controller = {
+  getAll: async (req, res) => {
+    await StatusDb.findAll().then((statuses) => {
+      if (statuses.length !== 0) {
+        res.status(200).send(statuses);
+      } else {
+        res.status(404).send({ message: 'No statuses found!' });
+      }
+    });
+  },
 
-    getAll: async (req,res)=>{
-        try{
-            const facilitiesStatus = await FacilitiesStatusDb.findAll();
-        if(facilitiesStatus){
-            res.status(200).send(facilitiesStatus);
-        }else{
-            res.status(404).send({message:"Facilities status not found!"});
-        }
-        }catch(err){
-            res.status(500).send({message:"Server error!"});
-        }
-    },
-    
-    getById: async(req,res)=>{
-        try{
-            const facilityStatus = await FacilitiesStatusDb.findByPk(req.params.id);
-            res.status(200).send(facilityStatus);
-        }catch(err){
-            res.status(500).send({message:"Server error!"});
-        }
-    },
-
-    add: async(req,res)=>{
-        const{numberOfBalls, condition}=req.body;
-        let errors=[];
-        if(!numberOfBalls){
-            errors.push("Number of balls required!");
-        }
-        if(!conditon){
-            errors.push("Condition required!");
-        }
-        if(errors.length>0){
-            res.status(400).send(errors);
-        }
-
-        try{
-            const newStatus = await FacilitiesStatusDb.create({
-                numberOfBalls, 
-                condition,
-            });
-            res.status(200).send(newStatus);
-        }catch(err){
-            res.status(500).send({message:"Server error!"});
-        }
-
-    },
-
-updateById: async(req,res)=>{
-
-    const{id}=req.params.id;
-    try{
-        const status = FacilitiesStatusDb.findByPk(id);
-        if(status){
-            await status.update(req.body);
-            res.status(200).send({message:"Rental updated successfully!"});
-
-        }else{
-            res.status(404).send({message:"Rental not found!"});
-        }
-    }catch(err){
-        console.log(err);
-        res.status(500).send({message:"Server error!"});
+  getById: async (req, res) => {
+    try {
+      const status = await StatusDb.findOne({
+        where: {
+          SportFacilityId: req.params.id,
+        },
+      });
+      if (status) {
+        res.status(200).send(status);
+      } else {
+        res.status(404).send('Not found');
+      }
+    } catch (err) {
+      res.status(500).send('Server error!');
     }
-}
-    ,
+  },
 
-    deleteById: (req, res)=>{
-        const facilityStatusId = req.params.id;
-        FacilitiesStatusDb.destroy({where:{id: facilityStatusId}})
-        .then((result)=>{
-            if(result){
-            res.status(200).send({message:"Facility status with ${id} has been successfully deleted!"});
-        }else{
-            res.status(404).send({message:"Facility status with ${id} not found!"});
-        }
-        })
-        .catch((err)=>{
-            console.log(err);
-            res.status(500).send({message:"Error deleting facility status with id ${id}"});
-        })
+  add: async (req, res) => {
+    const id = req.params.id;
+    const { numberOfBalls, condition } = req.body;
+
+    let errors = [];
+    if (!numberOfBalls) {
+      errors.push('nr balls not inserted');
+    }
+    if (!condition) {
+      errors.push('condition not inserted');
+    }
+    if (errors.length > 0) {
+      res.status(400).send(errors);
     }
 
-}
+    try {
+      const newStatus = await StatusDb.create({
+        numberOfBalls,
+        condition,
+        SportFacilityId: id,
+      });
+      res.status(201).send(newStatus);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({ message: 'Server error!' });
+    }
+  },
 
-module.exports = controller; 
+  updateById: async (req, res) => {
+    const id = req.params.id;
+    const { numberOfBalls, condition } = req.body;
+    try {
+      const status = await StatusDb.findByPk(id);
+      if (status) {
+        status.numberOfBalls = numberOfBalls;
+        status.condition = condition;
+        await status.save();
+        res.status(200).send(status);
+      }
+    } catch (err) {
+      res.status(500).send('Eroare la actualziare');
+    }
+  },
+};
+
+module.exports = controller;

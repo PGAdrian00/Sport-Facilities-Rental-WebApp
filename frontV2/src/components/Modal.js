@@ -1,10 +1,26 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import "../styles/Modal.css";
 import Eye from "../assets/eye.svg";
+import { UserContext } from "../UserContext";
 
-function Modal({ setOpenModal }) {
+function Modal(props) {
+
+  const { user } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
     const [showPassword,setShowPassword]=useState(false)
+
+    const[ enteredEmail, setEnteredEmail] = useState("");
+    const[ enteredPassword, setEnteredPassword] = useState("");
+
+    const emailChangeHandler = (event) => {
+      setEnteredEmail(event.target.value);
+    };
+  
+    const passwordChangeHandler = (event) => {
+      setEnteredPassword(event.target.value);
+    };
+
 
     function password(){
         let pass=document.getElementById('pass')
@@ -24,7 +40,7 @@ function Modal({ setOpenModal }) {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setOpenModal(false);
+              props.setOpenModal(false);
             }}
           >
             +
@@ -35,16 +51,26 @@ function Modal({ setOpenModal }) {
         </div>
         <div className="body">
           <label htmlFor="email">Email</label>
-          <input className='input' name='email' type='email'/>
+          <input className='input' name='email' type='email' onChange={emailChangeHandler} value={enteredEmail}/>
           <label htmlFor="password">Parola</label>
-          <input className='input' id='pass' name='password' type='password'/>
+          <input className='input' id='pass' name='password' type='password' onChange={passwordChangeHandler} value={enteredPassword}/>
           <p>am uitat parola</p>
           <img src={Eye} alt='eye' className="eye" onClick={password}/>
         </div>
         <div className="footer-modal">
           <button
             onClick={() => {
-              setOpenModal(false);
+              // console.log(enteredEmail);
+              // console.log(enteredPassword);
+              props.setOpenModal(false);
+              const userData = {
+                userEmail: enteredEmail,
+                userPassword: enteredPassword,
+              };
+              props.doLogin(userData)
+              // setUser(userData)
+              
+              
             }}
             id="cancelBtn"
           >

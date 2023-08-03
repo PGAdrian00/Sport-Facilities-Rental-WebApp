@@ -3,35 +3,30 @@
     justify-content: space-between;
 }
 
-.my-button {
+
+.my-button, .my-button2, .my-button3 {
     margin: 0 10px;
-    width: 100px; 
+    width: 45%; /* Adjust width based on your needs */
     height: 48px;
     font-size: 16px;
     padding: 10px;
+    transition: background-color 0.5s ease-in; /* Add transition to smooth the color change */
 }
 
 .my-button2 {
-    margin: 0 10px;
-    width: 100px; 
-    height: 48px;
-    font-size: 16px;
-    padding: 10px;
-
     background-color: #090B3C;
-    border:2px solid #090B3C;
-    transition: 0.s all ease-in;
+    border: 2px solid #090B3C;
+}
+
+.my-button2:hover {
+    background-color: #A3A6C5; /* Change color on hover */
 }
 
 .my-button3 {
-    margin: 0 10px;
-    width: 100px; 
-    height: 48px;
-    font-size: 16px;
-    padding: 10px;
-
     background-color: #090B3C;
-    border:2px solid #090B3C;
-    transition: 0.s all ease-in;
+    border: 2px solid #090B3C;
 }
 
+.my-button3:hover {
+    background-color: #A3A6C5; /* Change color on hover */
+}

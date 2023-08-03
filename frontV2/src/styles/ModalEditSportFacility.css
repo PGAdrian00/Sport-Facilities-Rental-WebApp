@@ -1,0 +1,52 @@
+.edit-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 80%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cancel-button {
+    padding: 10px 20px;
+    background-color: #f44336;  /* red color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;  /* add some top margin if necessary */
+}
+
+.cancel-button:hover {
+    background-color: #d32f2f;  /* darker red color on hover */
+}
+
+.save-button {
+    padding: 10px 20px;
+    background-color: #4caf50;  /* green color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;  /* add some top margin if necessary */
+}
+
+.save-button:hover {
+    background-color: #45a049;  /* darker green color on hover */
+}
+
+

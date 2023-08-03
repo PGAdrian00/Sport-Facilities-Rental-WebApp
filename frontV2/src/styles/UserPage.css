@@ -1,0 +1,182 @@
+.user-card {
+  max-width: 90%;
+  margin: 50px auto;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.welcome-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.default-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rentals-table,
+.facilities-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.rentals-table th,
+.rentals-table td,
+.facilities-table th,
+.facilities-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.rentals-table td:nth-child(4),
+.facilities-table td:nth-child(3) {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.add-facility-button {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.add-facility-button:hover {
+  background-color: #358737;
+}
+
+.pay-button {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 1px;
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background-color: #358737;
+}
+
+.table-container {
+  max-height: 300px;
+  overflow: auto;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Adjust the column widths */
+
+.rentals-table th:nth-child(1), 
+.rentals-table td:nth-child(1),
+.facilities-table th:nth-child(1), 
+.facilities-table td:nth-child(1) {
+  width: 20%;
+}
+
+.rentals-table th:nth-child(2), 
+.rentals-table td:nth-child(2) {
+  width: 20%;
+}
+
+.rentals-table th:nth-child(3), 
+.rentals-table td:nth-child(3) {
+  width: 20%;
+}
+
+.rentals-table th:nth-child(4), 
+.rentals-table td:nth-child(4),
+.facilities-table th:nth-child(3), 
+.facilities-table td:nth-child(3) {
+  width: 20%;
+}
+
+.rentals-table th:nth-child(5), 
+.rentals-table td:nth-child(5),
+.facilities-table th:nth-child(4), 
+.facilities-table td:nth-child(4) {
+  width: 20%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.see-button, .update-button {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 2px 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.see-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.see-button:hover {
+  background-color: #358737;
+}
+
+.update-button {
+  background-color: #FFD700;
+  color: black;
+}
+
+.update-button:hover {
+  background-color: #cabb1e;
+}

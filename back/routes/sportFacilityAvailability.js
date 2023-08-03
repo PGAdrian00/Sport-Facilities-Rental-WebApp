@@ -5,9 +5,10 @@ const sportFacilityAvailabilityController = require("../controllers/sportFacilit
 
 router.get("/", sportFacilityAvailabilityController.getAll);
 router.get("/:id", sportFacilityAvailabilityController.getById);
-router.post("/", sportFacilityAvailabilityController.add);
+router.post("/:id", sportFacilityAvailabilityController.add);
 router.put("/:sportFacilityAvailabilityId", sportFacilityAvailabilityController.update);
-router.delete("/:sportFacilityAvailabilityId", sportFacilityAvailabilityController.delete);
+router.delete("/:id", sportFacilityAvailabilityController.delete);
+router.post("/:id/:userId", sportFacilityAvailabilityController.rentThePlace);
 
 
 module.exports = router;

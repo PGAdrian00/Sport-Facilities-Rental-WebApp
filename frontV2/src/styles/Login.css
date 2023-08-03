@@ -1,0 +1,27 @@
+.user {
+    position: relative;
+  }
+  
+  .user .user-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%; /* poziționează meniul imediat sub containerul părinte */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    z-index: 1; 
+    width: 60px; /* puteți ajusta lățimea după necesități */
+  }
+  
+  .user .user-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .user:hover .user-menu {
+    display: block;
+  }
+  
