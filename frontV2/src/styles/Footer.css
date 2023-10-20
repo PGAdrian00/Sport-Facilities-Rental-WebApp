@@ -1,0 +1,88 @@
+.footer {
+  
+  display: flex;
+  justify-content: space-around;
+  background-color: #36353b;
+  align-items: center;
+  color: white;
+  padding: 10px;
+}
+.logo {
+  width: 150px;
+  height: 100px;
+  cursor:pointer;
+}
+.contact * {
+  margin: 0px;
+  padding: 5px;
+}
+.contact h2 {
+  font-size: 20px;
+}
+.contact p {
+  font-size: 15px;
+  color: lightgray;
+}
+
+.label {
+  display: block;
+  padding: 5px;
+  padding-left: 0px;
+  font-size: 20px;
+  margin: 0px;
+  font-weight: bold;
+}
+#email {
+  text-align: center;
+  padding: 10px 20px;
+}
+.abonare {
+  padding: 10px;
+  margin-left: 10px;
+  color: white;
+  background-color: #7B90D6;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    position: relative;
+  }
+  .logo {
+    position: absolute;
+    left: 5%;
+  }
+  .newsletter {
+    position: relative;
+    left: 60px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .logo {
+    left: 2%;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .logo {
+    left:60%;
+    top:15%;
+   
+  }
+  .footer {
+    align-items: flex-start;
+  }
+  .newsletter {
+    left: 5px;
+  }
+  #email {
+    padding: 10px 10px;
+  }
+}
+
+@media only screen and (max-width: 321px) {
+    .logo{
+        width:120px;
+        height:70px;
+    }
+}

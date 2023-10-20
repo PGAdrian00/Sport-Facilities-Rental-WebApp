@@ -1,0 +1,12 @@
+.teren-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.teren-list > * {
+  flex: 1 0 200px;
+  margin: 10px;
+  box-sizing: border-box;
+}
